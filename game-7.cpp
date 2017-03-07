@@ -1,4 +1,4 @@
-#include<graphics.h>
+#include<graphics.h> //comment
 #include<stdio.h>
 #include<time.h>
 #include<conio.h>
@@ -70,7 +70,7 @@ int main()
             system("cls");
             printf("\t \t \tHELP\t \t \t \n");
             printf("This game is based on one reality show.In this game there is 15 questions and 4 options in each questions with 4 lifeline.If your answer is correct you will win some money(Rs 5000 for 1st question and will doubled in each next questions)   and  proceed to next question.Lifelines are:-\n1.Phone a friend:You can call your friend and ask question to him/her.\n2.*2:-You can answer twice even your answer is wrong.\n3.Flip the question:-The question will removed and replaced by new one.\n(Note:You can't use same lifeline twice) ");
-            printf("\n \n \n 1.Press 2 to quit \n 2.Press 1 to return to mainmenu");
+            printf("\n \n \n 1.Press 2 to quit \n 2.Press 1 to return to main menu");
             a=_getch();
             if(a=='1')
                 main();
