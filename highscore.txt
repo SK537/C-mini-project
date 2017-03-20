@@ -1,1 +1,3 @@
-1000
+Player name: Rabindra
+Player highscore: 320000
+Played date:Mon Mar 20 21:58:51 2017

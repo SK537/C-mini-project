@@ -5,7 +5,7 @@
 #include<dos.h>
 #include<windows.h>
 #include<string.h>
-int amount_won,life1,life2,life3,life4,file_num;
+int amount_won,life1,life2,life3,life4,file_num,quit=0;
 char ans;
 char uname[50]="Guest account", pw[50];
 int successful_login=0;
@@ -112,12 +112,12 @@ int main()
 
 void sgame()
 {
-    char ques[50],a[15],b[15],c[15],d[15],garbage,correct;
+    char ques[50],a[15],b[15],c[15],d[15],garbage1,correct;
     int status,linenumber[15],index=0,i;
     window();
     srand(time(NULL));
     FILE *fp;
-    fp=fopen("a.txt","r");
+    fp=fopen("questions.txt","r");
     if (fp==NULL)
         printf("File not read successfully...");
 
@@ -147,8 +147,17 @@ void sgame()
             if (flag==file_line)
                 {
 
-                    fscanf(fp,"%[^!]s",&ques);
-                    fscanf(fp,"%c %s %s %s %s %c",&garbage,&a,&b,&c,&d,&correct);
+                    fscanf(fp,"%[^!]",&ques);
+                    fscanf(fp,"%c",&garbage1);
+                    fscanf(fp,"%[^@]s",&a);
+                    fscanf(fp,"%c",&garbage1);
+                    fscanf(fp,"%[^#]s",&b);
+                    fscanf(fp,"%c",&garbage1);
+                    fscanf(fp,"%[^$]s",&c);
+                    fscanf(fp,"%c",&garbage1);
+                    fscanf(fp,"%[^%]s",&d);
+                    fscanf(fp,"%c",&garbage1);
+                    fscanf(fp,"%c",&correct);
                     break;
                 }
             else
@@ -162,6 +171,21 @@ void sgame()
         if (status==0)
         {
             ///*******highscores**********
+             if(quit==1)
+            {   if(amount_won<80000)
+                amount_won=0;
+                else
+                 amount_won=amount_won;
+            }
+
+            else
+            {
+
+            if(amount_won<80000)
+            amount_won=0;
+            if(amount_won>80000&&amount_won<1280000)
+                amount_won=80000;
+            }
             FILE *pf;
             time_t mytime;
             mytime = time(NULL);
@@ -254,9 +278,9 @@ int game(char *ques1,char *a1,char* b1,char* c1,char* d1,char correct1)
     outtextxy(y3+240,50,arr);
     rectangle(y3+100,80,y3+400,600);
     int k;
-    int amtt=500;
+    int amtt=5000;
     for(k=1;k<520;k++)
-    {if(amtt<=10000000)
+    {if(amtt<=100000000)
     {
         if (k==5||k==9||k==11)
             setcolor(WHITE);
@@ -266,10 +290,9 @@ int game(char *ques1,char *a1,char* b1,char* c1,char* d1,char correct1)
         circle(y3+355,597-30*k,10);
         if (amount_won>=amtt)
             redgreen(y3+355,597-30*k,1);
-        if(amtt==256000)
-            amtt=amtt+244000;
+        if(amtt==2560000)
+            amtt=amtt+(5000000-2560000);
         else amtt=amtt*2;
-
     }
     else
         break;
@@ -331,6 +354,7 @@ int game(char *ques1,char *a1,char* b1,char* c1,char* d1,char correct1)
         if (ans=='q')
         {
             outtextxy(x1,(y2+60)+50,"You have decide to quit with won money..press any key                                  ");
+            quit=1;
             getch();
             return 0;
         }
@@ -463,9 +487,12 @@ void correct(int a,int b,int c,int d)
 {
         int i;
         if(amount_won==0)
-            amount_won=amount_won+500;
-        else
+    amount_won=amount_won+5000;
+    else {  if(amount_won==2560000)
+            amount_won=amount_won+2440000;
+    else
             amount_won=amount_won*2;
+        }
         rectangle(a,b,c,d);
         setfillstyle(SOLID_FILL,YELLOW);
         floodfill(a+1,b+1,WHITE);
